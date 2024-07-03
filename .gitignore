@@ -26,5 +26,4 @@ dist-ssr
 
 # Comment out this line if you want to start tracking individual migrations.
 migrations/versions/*.py
-/public/*
-!/public/.gitkeep
+/public/assets/*
