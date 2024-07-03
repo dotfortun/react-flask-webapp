@@ -9,6 +9,7 @@
     "settings": {
       "python.defaultInterpreterPath": "./.venv/bin/python",
       "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true,
       "eslint.validate": ["javascript", "typescript"],
       "workbench.editorAssociations": {
         "*.md": "vscode.markdown.preview.editor"
