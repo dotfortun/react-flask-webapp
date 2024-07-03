@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from backend.models import db, User
 from flask_cors import CORS
 
-api = Blueprint('api', __name__)
+api = Blueprint('api', __name__, url_prefix="/api")
 
 # Allow CORS requests to this API
 CORS(api)

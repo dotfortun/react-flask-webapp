@@ -18,7 +18,11 @@ load_dotenv()
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), './public/')
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='',
+            static_folder='./public'
+            )
+
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
     "DATABASE_URI", 'sqlite:///app.db')
 
@@ -59,8 +63,12 @@ def generate_sitemap(app):
         <ul style="text-align: left;">"""+links_html+"</ul></div>"
 
 
-@app.route('/')
-def sitemap():
+@app.route('/', defaults={"filepath": ""})
+@app.route('/<path:filepath>')
+def sitemap(filepath):
     if app.debug:
         return generate_sitemap(app)
-    return send_from_directory(static_file_dir, 'index.html')
+    print(filepath)
+    if not os.path.isfile(os.path.join("./public", filepath)):
+        return send_from_directory("./public", os.path.join(filepath, "index.html"))
+    return send_from_directory("./public", filepath)
