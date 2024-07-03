@@ -20,7 +20,7 @@ python_version = "3.11"
 
 [scripts]
 start="flask run --debug --reload --port 3001"
-serve="flask run --reload --port 3000"
+serve="flask run --port 3000"
 setup="flask db init"
 migrate="flask db migrate"
 upgrade="flask db upgrade"
