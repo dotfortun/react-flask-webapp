@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask-sqlalchemy = "*"
+psycopg2-binary = "*"
+flask-migrate = "*"
+sqlalchemy = "*"
+flask-cors = "*"
+flask-admin = "*"
+python-dotenv = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
+
+[scripts]
+start="flask --app main:app run --debug --reload --port 3001"
+setup="flask --app main:app db init"
+upgrade="flask --app main:app db upgrade"
+downgrade="flask --app main:app db downgrade"
+resetdb=""
