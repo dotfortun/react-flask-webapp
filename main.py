@@ -68,7 +68,6 @@ def generate_sitemap(app):
 def sitemap(filepath):
     if app.debug:
         return generate_sitemap(app)
-    print(filepath)
     if not os.path.isfile(os.path.join("./public", filepath)):
         return send_from_directory("./public", os.path.join(filepath, "index.html"))
     return send_from_directory("./public", filepath)
