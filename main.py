@@ -3,10 +3,15 @@ import os
 from dotenv import load_dotenv
 
 from flask import (
-    Flask, jsonify, url_for
+    Flask, jsonify, send_from_directory, url_for
 )
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+
+from backend.admin import setup_admin
+from backend.models import db
+from backend.routes import api
 
 load_dotenv()
 
@@ -17,8 +22,13 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
     "DATABASE_URI", 'sqlite:///app.db')
 
-db = SQLAlchemy(app)
+db.init_app(app)
 migrate = Migrate(app, db)
+cors = CORS(app)
+
+setup_admin(app)
+
+app.register_blueprint(api)
 
 
 def has_no_empty_params(rule):
@@ -51,6 +61,6 @@ def generate_sitemap(app):
 
 @app.route('/')
 def sitemap():
-    if ENV == "development":
+    if app.debug:
         return generate_sitemap(app)
     return send_from_directory(static_file_dir, 'index.html')
