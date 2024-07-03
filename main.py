@@ -14,10 +14,12 @@ static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), './public/')
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI", 'sqlite:///app.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+    "DATABASE_URI", 'sqlite:///app.db')
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
 
 def has_no_empty_params(rule):
     defaults = rule.defaults if rule.defaults is not None else ()
